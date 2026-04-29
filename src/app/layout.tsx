@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import BottomNavigation from "@/components/BottomNavigation/BottomNavigation";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
@@ -21,7 +22,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <div id="app-frame">{children}</div>
+        <div id="app-frame">
+          <main id="app-content">{children}</main>
+          <BottomNavigation />
+        </div>
       </body>
     </html>
   );

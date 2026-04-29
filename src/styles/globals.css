@@ -49,10 +49,18 @@
   }
 
   #app-frame {
+    position: relative;
     width: 375px;
     height: 812px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
     background: var(--color-black);
+  }
+
+  #app-content {
+    flex: 1 1 auto;
+    min-height: 0;
   }
 }
 
