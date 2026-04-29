@@ -1,0 +1,17 @@
+@theme {
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-grey-900: #121212;
+  --color-grey-800: #424242;
+  --color-grey-700: #8c8787;
+  --color-grey-600: #c4c4c4;
+}
+
+:root {
+  --gradient-linear: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 45%) 0%,
+    rgb(0 0 0 / 0%) 87%,
+    rgb(0 0 0 / 100%) 100%
+  );
+}

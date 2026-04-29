@@ -40,8 +40,7 @@
 ### 👥 Research Question
 
 - 전반적인 협업 과정에 대해 알려주세요. 👏🏻 <br/>
-(프로젝트에서 해당 패키지 매니저를 선택한 이유, 파일 구조 컨벤션을 어떻게 지켰는지, <br/>업무 분담과 소통 방식은 어떻게 진행했는지를 함께 정리해 주세요. 21기, 22기 PR을 참고하시면 좋습니다!)
-
+  (프로젝트에서 해당 패키지 매니저를 선택한 이유, 파일 구조 컨벤션을 어떻게 지켰는지, <br/>업무 분담과 소통 방식은 어떻게 진행했는지를 함께 정리해 주세요. 21기, 22기 PR을 참고하시면 좋습니다!)
 
 ### 🔑 Review Questions
 
@@ -53,20 +52,25 @@
 ---
 
 ### **🔗 링크 및 참고자료**
+
 (React)
+
 - [useCallback과 React.Memo를 이용한 렌더링 최적화](https://velog.io/@yejinh/useCallback%EA%B3%BC-React.Memo%EC%9D%84-%ED%86%B5%ED%95%9C-%EB%A0%8C%EB%8D%94%EB%A7%81-%EC%B5%9C%EC%A0%81%ED%99%94)
 - [성능 최적화](https://ui.toast.com/fe-guide/ko_PERFORMANCE)
 - [React 18의 새로운 기능](https://www.youtube.com/watch?v=7mkQi0TlJQo)
 - [react 서버 컴포넌트가 해결하는 문제들 in kakao 기술 블로그](https://tech.kakaopay.com/post/react-server-components/)
 
 (Vercel)
+
 - [vercel의 배포 방식](https://www.youtube.com/watch?v=8q-jCvLWwKc&t=11s)
 - [조직 레포를 우회해 무료 배포하는 법](https://bori-note.tistory.com/73)
 
 (랜딩페이지 Netflix 로고)
+
 - [랜딩페이지 영상](https://lottiefiles.com/free-animation/netflix-logo-swoop-6nEmnysrGE)
 
 (Next.js)
+
 - [Next.js Docs](https://nextjs.org/docs)
 - [Next.js 13에서 변한 것들](https://velog.io/@hang_kem_0531/Next.js-13%EC%9D%B4-%EB%82%98%EC%99%80%EB%B2%84%EB%A0%B8%EB%8B%A4)
 - [Next.js 14에서 변한 것들](https://velog.io/@lee_1124/Next.js-14-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8)
@@ -74,5 +78,87 @@
 - [React & Next.js에서 발견된 취약점-(CVE-2025-55182(React2Shell)](https://news.hada.io/topic?id=24874)
 
 (협업)
+
 - [Git 협업 가이드](https://velog.io/@jinuku/Git-%ED%98%91%EC%97%85-%EA%B0%80%EC%9D%B4%EB%93%9C)
 - [디자이너와 개발자가 협업하기 위한 피그마 기본 기능](https://chingguhl.tistory.com/entry/%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80-%EA%BC%AD-%EC%95%8C%EC%95%84%EC%95%BC-%ED%95%A0-%ED%94%BC%EA%B7%B8%EB%A7%88-10%EA%B0%80%EC%A7%80-%EA%B8%B0%EB%8A%A5-%EB%94%94%EC%9E%90%EC%9D%B4%EB%84%88%EC%99%80-%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80-%ED%98%91%EC%97%85%ED%95%98%EA%B8%B0-%EC%9C%84%ED%95%9C-%ED%94%BC%EA%B7%B8%EB%A7%88-%EA%B8%B0%EB%B3%B8-%EA%B8%B0%EB%8A%A5)
+
+---
+
+## 프로젝트 초기 세팅
+
+### 패키지 매니저
+
+이 프로젝트는 `npm`을 사용합니다.
+
+```bash
+npm install
+npm run dev
+```
+
+### 주요 라우트
+
+- `/`: 랜딩 페이지
+- `/main`: 메인 페이지
+- `/search`: 검색 페이지
+- `/detail/[id]`: 상세 페이지
+
+### 폴더 구조
+
+```text
+public
+├── icons
+├── images
+├── logos
+└── posters
+
+src
+├── apis
+├── app
+│   ├── detail/[id]
+│   ├── main
+│   └── search
+├── components
+│   ├── Detail
+│   ├── Landing
+│   ├── Main
+│   ├── Search
+│   ├── common
+├── constants
+├── data
+├── hooks
+├── store
+├── styles
+├── types
+└── utils
+```
+
+### 협업 컨벤션 메모
+
+- 일반 폴더명은 소문자 시작 camelCase를 사용합니다.
+- 컴포넌트 폴더와 컴포넌트 파일명은 PascalCase를 사용합니다.
+- `.ts` 파일명, 함수명, 변수명은 소문자 시작 camelCase를 사용합니다.
+- 이미지 등 asset 파일명은 소문자를 사용합니다.
+- Next.js App Router의 `page.tsx`, `layout.tsx` 등 예약 파일은 프레임워크 규칙에 맞춰 소문자 파일명을 유지합니다.
+- Next.js 프로젝트이므로 라우트는 `src/app`에서 관리하고, 페이지별 UI 컴포넌트는 `src/components/{Landing,Main,Search,Detail}`에 분리합니다.
+- 정적 이미지, 아이콘, 로고, 폰트처럼 URL로 직접 접근하는 파일은 `public` 아래에 둡니다.
+- 공통 디자인 토큰은 `src/styles/colors.css`, `src/styles/fonts.css`에 나누어 관리하고, 최종 진입점인 `src/styles/globals.css`에서 import합니다.
+
+### 디자인 시스템 토큰
+
+Figma 기준 색상, 타이포그래피, linear gradient 값은 `src/styles/colors.css`, `src/styles/fonts.css`에 Tailwind v4 `@theme` 토큰과 CSS 변수로 등록되어 있습니다.
+Next.js App Router 구조이므로 전역 CSS는 `main.tsx`가 아니라 `src/app/layout.tsx`에서 `src/styles/globals.css`를 import합니다.
+
+- Color: `--color-black`, `--color-white`, `--color-grey-900`, `--color-grey-800`, `--color-grey-700`, `--color-grey-600`
+- Gradient: `--gradient-linear`
+- Type class: `.text-heading-1`, `.text-heading-2`, `.text-body-1`, `.text-body-2`, `.text-label-1`, `.text-label-2`, `.text-caption-1`, `.text-caption-2`
+
+Tailwind class 예시:
+
+```tsx
+<section className="bg-black font-pretendard text-white">
+  <h1 className="text-heading-1 font-semibold leading-design tracking-design">
+    Previews
+  </h1>
+  <div className="bg-[image:var(--gradient-linear)]" />
+</section>
+```
