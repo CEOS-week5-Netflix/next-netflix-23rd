@@ -14,6 +14,10 @@ const navigationItems = [
 export default function BottomNavigation() {
   const pathname = usePathname();
 
+  if (pathname.startsWith("/detail")) {
+    return null;
+  }
+
   return (
     <nav
       className="w-[375px] flex-[0_0_87.703px] bg-black"
