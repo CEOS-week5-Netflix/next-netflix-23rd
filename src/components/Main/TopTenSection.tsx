@@ -17,7 +17,7 @@ function subscribeToMyList(onStoreChange: () => void) {
   return () => window.removeEventListener(MY_LIST_EVENT, onStoreChange);
 }
 
-const EMPTY_MOVIES = [];
+const EMPTY_MOVIES: Movie[] = [];
 
 export default function TopTenSection({ movies, imageBase }: Props) {
   const [current, setCurrent] = useState(0);

@@ -3,15 +3,21 @@ import SearchResultItem from "./SearchResultItem";
 
 type SearchResultsProps = {
   items: TmdbTrendingItem[];
+  emptyMessage?: string;
+  isLoading?: boolean;
 };
 
-export default function SearchResults({ items }: SearchResultsProps) {
+export default function SearchResults({
+  items,
+  emptyMessage = "검색 결과가 없습니다.",
+  isLoading = false,
+}: SearchResultsProps) {
+  if (isLoading) {
+    return <p className="px-4 text-body-2 text-grey-600">검색 중...</p>;
+  }
+
   if (items.length === 0) {
-    return (
-      <p className="px-4 text-body-2 text-grey-600">
-        TMDB_ACCESS_TOKEN을 .env.local에 추가하면 Top Searches가 표시됩니다.
-      </p>
-    );
+    return <p className="px-4 text-body-2 text-grey-600">{emptyMessage}</p>;
   }
 
   return (

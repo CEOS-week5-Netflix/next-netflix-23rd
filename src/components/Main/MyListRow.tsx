@@ -4,11 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSyncExternalStore } from "react";
 import { getMyList, MY_LIST_EVENT } from "@/store/myList";
+import type { Movie } from "@/types/movie";
 
 const IMAGE_BASE =
   process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_URL ?? "https://image.tmdb.org/t/p";
 
-const EMPTY_MOVIES = [];
+const EMPTY_MOVIES: Movie[] = [];
 
 function subscribeToMyList(onStoreChange: () => void) {
   window.addEventListener(MY_LIST_EVENT, onStoreChange);

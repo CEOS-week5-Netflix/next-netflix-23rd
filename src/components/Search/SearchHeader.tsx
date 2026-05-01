@@ -1,6 +1,16 @@
 import Image from "next/image";
 
-export default function SearchHeader() {
+type SearchHeaderProps = {
+  value: string;
+  onChange: (value: string) => void;
+  onClear: () => void;
+};
+
+export default function SearchHeader({
+  value,
+  onChange,
+  onClear,
+}: SearchHeaderProps) {
   return (
     <>
       <div className="h-11 w-full flex-none bg-black" aria-hidden="true" />
@@ -21,6 +31,8 @@ export default function SearchHeader() {
           name="search"
           type="text"
           inputMode="search"
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
           placeholder="Search for a show, movie, genre, e.t.c."
           className="ml-5 flex h-[31px] min-w-0 flex-1 appearance-none items-center bg-transparent font-[Pretendard] text-[15px] leading-[135%] font-normal tracking-[-0.3px] text-white outline-none placeholder:font-normal placeholder:text-grey-600 [font-feature-settings:'liga'_off,'clig'_off]"
         />
@@ -28,6 +40,7 @@ export default function SearchHeader() {
           type="button"
           className="ml-4 flex h-4 w-4 flex-none items-center justify-center bg-transparent p-0"
           aria-label="Clear search"
+          onClick={onClear}
         >
           <Image
             src="/icons/ic_x.svg"

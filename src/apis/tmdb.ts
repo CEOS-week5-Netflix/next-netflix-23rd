@@ -52,6 +52,37 @@ export async function getTopSearches(): Promise<TmdbTrendingItem[]> {
     .slice(0, 10);
 }
 
+export async function searchTmdb(query: string): Promise<TmdbTrendingItem[]> {
+  const headers = getTmdbHeaders();
+  const keyword = query.trim();
+
+  if (!headers || !keyword) {
+    return [];
+  }
+
+  const searchParams = new URLSearchParams({
+    query: keyword,
+    language: "en-US",
+    include_adult: "false",
+  });
+
+  const response = await fetch(`${TMDB_BASE_URL}/search/multi?${searchParams}`, {
+    headers,
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    return [];
+  }
+
+  const data = (await response.json()) as TmdbTrendingResponse;
+
+  return (data.results ?? [])
+    .filter((item) => item.media_type !== "person")
+    .filter((item) => getTmdbImagePath(item))
+    .slice(0, 20);
+}
+
 export async function getDetail(
   id: string,
   mediaType?: string,
