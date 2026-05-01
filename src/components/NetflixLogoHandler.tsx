@@ -2,9 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { DotLottieReact, DotLottie } from "@lottiefiles/dotlottie-react";
 
 export default function NetflixLogoHandler() {
+  const router = useRouter();
   const [dotLottie, setDotLottie] = useState<DotLottie | null>(null);
   const [logoState, setLogoState] = useState<"image" | "lottie" | "finished">(
     "image",
@@ -21,6 +23,7 @@ export default function NetflixLogoHandler() {
       setIsLottieFading(true);
       setTimeout(() => {
         setLogoState("finished");
+        router.push("/main");
       }, 1000); // 로티 페이드아웃 시간
     };
 
