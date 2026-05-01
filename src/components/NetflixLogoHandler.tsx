@@ -33,7 +33,7 @@ export default function NetflixLogoHandler() {
     return () => {
       dotLottie.removeEventListener("complete", handleComplete);
     };
-  }, [dotLottie, logoState]);
+  }, [dotLottie, logoState, router]);
 
   // ⭐ 로고 이미지 클릭 핸들러
   const handleImageClick = () => {

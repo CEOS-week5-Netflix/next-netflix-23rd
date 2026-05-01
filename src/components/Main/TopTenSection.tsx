@@ -1,19 +1,25 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { Check, Play, Info, Plus } from "lucide-react";
 import { Movie } from "@/types/movie";
-import { toggleMyList, isInMyList } from "@/store/myList";
+import { getMyList, MY_LIST_EVENT, toggleMyList } from "@/store/myList";
 
 interface Props {
   movies: Movie[];
   imageBase: string;
 }
 
+function subscribeToMyList(onStoreChange: () => void) {
+  window.addEventListener(MY_LIST_EVENT, onStoreChange);
+  return () => window.removeEventListener(MY_LIST_EVENT, onStoreChange);
+}
+
 export default function TopTenSection({ movies, imageBase }: Props) {
   const [current, setCurrent] = useState(0);
-  const [inList, setInList] = useState(false);
+  const myList = useSyncExternalStore(subscribeToMyList, getMyList, () => []);
+  const inList = myList.some((movie) => movie.id === movies[current].id);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -22,13 +28,8 @@ export default function TopTenSection({ movies, imageBase }: Props) {
     return () => clearInterval(timer);
   }, [movies.length]);
 
-  useEffect(() => {
-    setInList(isInMyList(movies[current].id));
-  }, [current, movies]);
-
   function handleToggle() {
     toggleMyList(movies[current]);
-    setInList(isInMyList(movies[current].id));
   }
 
   return (

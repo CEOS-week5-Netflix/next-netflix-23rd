@@ -56,3 +56,29 @@
 - [Tanstack Query를 활용한 무한 스크롤 적용](https://oliveyoung.tech/2023-10-04/useInfiniteQuery-scroll/)
 - [해외 숙소 리스트 성능 개선기-반쪽짜리 ssr에서 완벽한 인피니트 스크롤까지](https://techblog.gccompany.co.kr/%ED%95%B4%EC%99%B8-%EC%88%99%EC%86%8C-%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EC%84%B1%EB%8A%A5-%EA%B0%9C%EC%84%A0%EA%B8%B0-%EB%B0%98%EC%AA%BD%EC%A7%9C%EB%A6%AC-ssr%EC%97%90%EC%84%9C-%EC%99%84%EB%B2%BD%ED%95%9C-%EC%9D%B8%ED%94%BC%EB%8B%88%ED%8A%B8-%EC%8A%A4%ED%81%AC%EB%A1%A4%EA%B9%8C%EC%A7%80-1ef7c7962dae)
 - [react-intersection-observer 라이브러리](https://react-intersection-observer.vercel.app/?path=/docs/intro--docs)
+- [React 18의 새로운 기능](https://www.youtube.com/watch?v=7mkQi0TlJQo)
+- [react 서버 컴포넌트가 해결하는 문제들 in kakao 기술 블로그](https://tech.kakaopay.com/post/react-server-components/)
+
+(Vercel)
+
+- [vercel의 배포 방식](https://www.youtube.com/watch?v=8q-jCvLWwKc&t=11s)
+- [조직 레포를 우회해 무료 배포하는 법](https://bori-note.tistory.com/73)
+
+(랜딩페이지 Netflix 로고)
+
+- [랜딩페이지 영상](https://lottiefiles.com/free-animation/netflix-logo-swoop-6nEmnysrGE)
+
+(Next.js)
+
+- [Next.js Docs](https://nextjs.org/docs)
+- [Next.js 13에서 변한 것들](https://velog.io/@hang_kem_0531/Next.js-13%EC%9D%B4-%EB%82%98%EC%99%80%EB%B2%84%EB%A0%B8%EB%8B%A4)
+- [Next.js 14에서 변한 것들](https://velog.io/@lee_1124/Next.js-14-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8)
+- [Next.js 15, 16](https://beam307.github.io/2026/03/18/nextjs16-vs15/)
+- [React & Next.js에서 발견된 취약점-(CVE-2025-55182(React2Shell)](https://news.hada.io/topic?id=24874)
+
+(협업)
+
+- [Git 협업 가이드](https://velog.io/@jinuku/Git-%ED%98%91%EC%97%85-%EA%B0%80%EC%9D%B4%EB%93%9C)
+- [디자이너와 개발자가 협업하기 위한 피그마 기본 기능](https://chingguhl.tistory.com/entry/%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80-%EA%BC%AD-%EC%95%8C%EC%95%84%EC%95%BC-%ED%95%A0-%ED%94%BC%EA%B7%B8%EB%A7%88-10%EA%B0%80%EC%A7%80-%EA%B8%B0%EB%8A%A5-%EB%94%94%EC%9E%90%EC%9D%B4%EB%84%88%EC%99%80-%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80-%ED%98%91%EC%97%85%ED%95%98%EA%B8%B0-%EC%9C%84%ED%95%9C-%ED%94%BC%EA%B7%B8%EB%A7%88-%EA%B8%B0%EB%B3%B8-%EA%B8%B0%EB%8A%A5)
+
+---

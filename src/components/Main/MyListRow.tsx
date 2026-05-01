@@ -1,24 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { Movie } from "@/types/movie";
+import { useSyncExternalStore } from "react";
 import { getMyList, MY_LIST_EVENT } from "@/store/myList";
 
 const IMAGE_BASE = process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_URL;
 
+function subscribeToMyList(onStoreChange: () => void) {
+  window.addEventListener(MY_LIST_EVENT, onStoreChange);
+  return () => window.removeEventListener(MY_LIST_EVENT, onStoreChange);
+}
+
 export default function MyListRow() {
-  const [movies, setMovies] = useState<Movie[]>([]);
-
-  function refresh() {
-    setMovies(getMyList());
-  }
-
-  useEffect(() => {
-    refresh();
-    window.addEventListener(MY_LIST_EVENT, refresh);
-    return () => window.removeEventListener(MY_LIST_EVENT, refresh);
-  }, []);
+  const movies = useSyncExternalStore(subscribeToMyList, getMyList, () => []);
 
   if (movies.length === 0) return null;
 
