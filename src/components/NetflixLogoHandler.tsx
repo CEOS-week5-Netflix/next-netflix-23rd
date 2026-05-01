@@ -15,6 +15,26 @@ export default function NetflixLogoHandler() {
   const [isImageFading, setIsImageFading] = useState(false); // 1. 이미지 사라짐 상태
   const [isLottieFading, setIsLottieFading] = useState(false); // 2. 로티 사라짐 상태
 
+  useEffect(() => {
+    const imageTimer = window.setTimeout(() => {
+      setIsImageFading(true);
+    }, 700);
+
+    const lottieTimer = window.setTimeout(() => {
+      setLogoState("lottie");
+    }, 1200);
+
+    const fallbackTimer = window.setTimeout(() => {
+      router.replace("/main");
+    }, 4200);
+
+    return () => {
+      window.clearTimeout(imageTimer);
+      window.clearTimeout(lottieTimer);
+      window.clearTimeout(fallbackTimer);
+    };
+  }, [router]);
+
   // 로티 재생 및 종료 제어
   useEffect(() => {
     if (!dotLottie || logoState !== "lottie") return;
@@ -23,7 +43,7 @@ export default function NetflixLogoHandler() {
       setIsLottieFading(true);
       setTimeout(() => {
         setLogoState("finished");
-        router.push("/main");
+        router.replace("/main");
       }, 1000); // 로티 페이드아웃 시간
     };
 
@@ -34,16 +54,6 @@ export default function NetflixLogoHandler() {
       dotLottie.removeEventListener("complete", handleComplete);
     };
   }, [dotLottie, logoState, router]);
-
-  // ⭐ 로고 이미지 클릭 핸들러
-  const handleImageClick = () => {
-    setIsImageFading(true); // 이미지 페이드아웃 시작
-
-    // 이미지 페이드아웃(500ms)이 끝난 후 로티로 교체
-    setTimeout(() => {
-      setLogoState("lottie");
-    }, 500);
-  };
 
   const dotLottieRefCallback = (instance: DotLottie) => {
     setDotLottie(instance);
@@ -56,10 +66,9 @@ export default function NetflixLogoHandler() {
       {/* 1. 이미지 섹션 */}
       {logoState === "image" && (
         <div
-          onClick={handleImageClick}
           className={`
-            pointer-events-auto cursor-pointer transition-all duration-500 ease-in-out
-            ${isImageFading ? "opacity-0 scale-95" : "opacity-100 scale-100 hover:scale-110"}
+            transition-all duration-500 ease-in-out
+            ${isImageFading ? "opacity-0 scale-95" : "opacity-100 scale-100"}
           `}
         >
           <Image

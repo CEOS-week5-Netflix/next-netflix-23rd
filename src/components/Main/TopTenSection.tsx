@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { Check, Play, Info, Plus } from "lucide-react";
 import { Movie } from "@/types/movie";
@@ -16,9 +17,15 @@ function subscribeToMyList(onStoreChange: () => void) {
   return () => window.removeEventListener(MY_LIST_EVENT, onStoreChange);
 }
 
+const EMPTY_MOVIES = [];
+
 export default function TopTenSection({ movies, imageBase }: Props) {
   const [current, setCurrent] = useState(0);
-  const myList = useSyncExternalStore(subscribeToMyList, getMyList, () => []);
+  const myList = useSyncExternalStore(
+    subscribeToMyList,
+    getMyList,
+    () => EMPTY_MOVIES,
+  );
   const inList = myList.some((movie) => movie.id === movies[current].id);
 
   useEffect(() => {
@@ -42,15 +49,22 @@ export default function TopTenSection({ movies, imageBase }: Props) {
         >
           {movies.map((movie, index) => (
             <div key={movie.id} className="relative flex-shrink-0 w-full h-[520px]">
-              <Image
-                src={`${imageBase}/w500${movie.poster_path}`}
-                alt={movie.title}
-                fill
-                className="object-cover"
-                priority={index === 0}
-              />
-              <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+              <Link
+                href={`/detail/${movie.id}?mediaType=movie`}
+                className="absolute inset-0"
+                aria-label={`${movie.title} 상세 페이지로 이동`}
+              >
+                <Image
+                  src={`${imageBase}/w500${movie.poster_path}`}
+                  alt={movie.title}
+                  fill
+                  sizes="375px"
+                  className="object-cover"
+                  priority={index === 0}
+                />
+              </Link>
+              <div className="pointer-events-none absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent" />
+              <div className="pointer-events-none absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
                 <span className="text-lg font-bold text-white flex flex-row gap-2 items-center justify-center">
                   <Image src="/icons/topten.svg" alt="top 10" width={20} height={20} />
                   #{index + 1} in Today

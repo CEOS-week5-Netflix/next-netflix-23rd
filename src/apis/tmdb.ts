@@ -101,7 +101,7 @@ async function fetchMovies(url: string): Promise<Movie[]> {
   }
 
   const data: TMDBResponse = await res.json();
-  return data.results.slice(0, 10);
+  return data.results.filter((movie) => movie.poster_path).slice(0, 10);
 }
 
 export async function getTopRatedMovies(): Promise<Movie[]> {

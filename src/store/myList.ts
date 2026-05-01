@@ -3,13 +3,28 @@
 import { Movie } from "@/types/movie";
 
 const KEY = "myList";
+const EMPTY_LIST: Movie[] = [];
+
+let cachedRaw: string | null = null;
+let cachedList: Movie[] = EMPTY_LIST;
 
 export function getMyList(): Movie[] {
-  if (typeof window === "undefined") return [];
+  if (typeof window === "undefined") return EMPTY_LIST;
+
+  const raw = localStorage.getItem(KEY) ?? "[]";
+
+  if (raw === cachedRaw) {
+    return cachedList;
+  }
+
   try {
-    return JSON.parse(localStorage.getItem(KEY) ?? "[]");
+    cachedRaw = raw;
+    cachedList = JSON.parse(raw);
+    return cachedList;
   } catch {
-    return [];
+    cachedRaw = raw;
+    cachedList = EMPTY_LIST;
+    return cachedList;
   }
 }
 

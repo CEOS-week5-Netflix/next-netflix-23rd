@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navigationItems = [
@@ -14,7 +15,7 @@ const navigationItems = [
 export default function BottomNavigation() {
   const pathname = usePathname();
 
-  if (pathname.startsWith("/detail")) {
+  if (pathname === "/" || pathname.startsWith("/detail")) {
     return null;
   }
 
@@ -30,11 +31,11 @@ export default function BottomNavigation() {
               pathname === item.href || (pathname === "/" && item.href === "/main");
 
             return (
-              <button
+              <Link
+                href={item.href}
                 className={`flex h-10 w-[60px] shrink-0 flex-col items-center justify-center gap-2 bg-transparent p-0 ${
                   isActive ? "text-white" : "text-grey-700"
                 }`}
-                type="button"
                 key={item.label}
                 aria-current={isActive ? "page" : undefined}
               >
@@ -50,7 +51,7 @@ export default function BottomNavigation() {
                 <span className="w-full overflow-hidden text-center font-[Pretendard] text-[10px] leading-[135%] font-medium tracking-[-0.2px] text-ellipsis whitespace-nowrap [font-feature-settings:'liga'_off,'clig'_off]">
                   {item.label}
                 </span>
-              </button>
+              </Link>
             );
           })}
         </div>
