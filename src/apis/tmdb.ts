@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { Movie, RowType, TMDBResponse } from "@/types/movie";
 import type {
   TmdbDetail,
   TmdbTrendingItem,
@@ -9,15 +10,15 @@ import { getTmdbImagePath, getTmdbMediaType } from "@/utils/tmdb";
 const TMDB_BASE_URL =
   process.env.NEXT_PUBLIC_TMDB_BASE_URL ?? "https://api.themoviedb.org/3";
 
-function getTmdbHeaders() {
-  const accessToken = process.env.TMDB_ACCESS_TOKEN;
+const TMDB_ACCESS_TOKEN = process.env.TMDB_ACCESS_TOKEN;
 
-  if (!accessToken) {
+function getTmdbHeaders() {
+  if (!TMDB_ACCESS_TOKEN) {
     return null;
   }
 
   return {
-    Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`,
     accept: "application/json",
   };
 }
@@ -80,4 +81,43 @@ export async function getDetail(
   }
 
   return (await response.json()) as TmdbDetail;
+}
+
+async function fetchMovies(url: string): Promise<Movie[]> {
+  const headers = getTmdbHeaders();
+
+  if (!headers) {
+    return [];
+  }
+
+  const res = await fetch(url, {
+    headers,
+    next: { revalidate: 3600 },
+  });
+
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`TMDB API 호출 실패 (${res.status}): ${body}`);
+  }
+
+  const data: TMDBResponse = await res.json();
+  return data.results.slice(0, 10);
+}
+
+export async function getTopRatedMovies(): Promise<Movie[]> {
+  return fetchMovies(
+    `${TMDB_BASE_URL}/movie/popular?language=ko-KR&region=KR&page=1`,
+  );
+}
+
+export async function getMoviesByType(
+  type: Exclude<RowType, "mylist">,
+): Promise<Movie[]> {
+  const endpoints: Record<Exclude<RowType, "mylist">, string> = {
+    action: `${TMDB_BASE_URL}/discover/movie?with_genres=28,35&language=ko-KR`,
+    original: `${TMDB_BASE_URL}/discover/movie?with_networks=213&language=ko-KR`,
+    korea: `${TMDB_BASE_URL}/discover/movie?with_original_language=ko&language=ko-KR&sort_by=popularity.desc`,
+  };
+
+  return fetchMovies(endpoints[type]);
 }

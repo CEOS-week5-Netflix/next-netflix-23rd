@@ -1,62 +1,61 @@
-# 5주차 과제: Next Netflix 🎬🍿
+# 6주차 과제: Next Netflix 🎬🍿
 
 ## 서론
 
-안녕하세요, 프론트엔드 운영진 **원채영**입니다! 🔥🤍 <br/><br/>
-이번 주부터는 새 프로젝트인 **Netflix 클론코딩**을 진행합니다! <br/>
-이번 과제에서는 **Next.js**를 활용해 **SSR(Server Side Rendering)** 을 직접 경험해보고, <br/>
-주어진 **Figma 디자인**을 활용해 스타일링 하는 방법을 이해하는 것을 목표로 합니다. <br/><br/>
-또한 이번 주부터는 프론트 페어와 함께하는 첫 과제인 만큼, 팀별로 미리 **호흡**을 맞춰볼 수 있는 좋은 기회가 될 것 같습니다.<br/>
-그럼 이번 과제도 모두 파이팅입니다!!!! 🔥🔥
+안녕하세요, 프론트엔드 운영진 **원채영**입니다! 😎
 
----
+이번 주는 지난 주에 이어 Netflix 프로젝트를 마무리해보는 과제입니다.
+
+이번 과제의 목표는 **Figma 디자인을 기반으로 한 스타일링 방식에 익숙해지고**, **Next.js의 SSR(Server Side Rendering)에 대한 이해도를 높이는 것**입니다.
+
+추가적으로, **성능 최적화 방법**에 대해서도 함께 고민해보시면 좋겠습니다. 🔥
+
+그럼, 이번 주차도 파이팅입니다! 💪🏻
 
 ## 과제
 
-### ⭐ 과제 목표
+### **⭐ 과제 목표**
 
-- Next.js 사용법을 공부해봅니다.
-- Figma로 주어지는 디자인으로 스타일링 하는 방식에 익숙해집니다.
-- Git을 이용한 협업 방식에 익숙해집니다.
-- 프론트엔드와 백엔드 시스템에 대한 흐름을 이해합니다.
+- Next.js 사용법을 익힙니다.
+- Figma 기반 스타일링 방식에 익숙해집니다.
+- Git을 활용한 협업 방식에 익숙해집니다.
+- 프론트엔드와 백엔드 간 데이터 흐름을 이해합니다.
 
 ### 📅 기한
 
-> 2026년 5월 2일 토요일 (기한 엄수)
+> 2026년 5월 9일 토요일 (기한 엄수)
+> 
 
-### ✅ 필수 요건
+### **✅ 필수 요건**
 
-- [결과화면](https://next-netflix-21th-suyoungswim.vercel.app/)의 랜딩 페이지와 메인 페이지를 구현합니다.
-- [Figma](https://www.figma.com/design/t9UWQMvti88h5oXkXYkc1r/Netflix-Figma?node-id=0-1&m=dev&t=RMIJ6HupyivB6i21-1)의 디자인을 그대로 구현합니다.
-- Open api를 사용해서 데이터 패칭을 진행합니다. (ex. [themoviedb API](https://developers.themoviedb.org/3/getting-started/introduction))
-- `yarn`, `yarn berry`, `npm`, `pnpm`등 패키지 매니저를 직접 선택해 Next.js를 세팅해 봅니다.
+- [결과화면](https://next-netflix-21th-suyoungswim.vercel.app/)의 **상세 페이지**와 **검색 페이지**를 구현합니다.
+    - 상세 페이지는 동적 라우팅을 이용해 구현합니다.
+    - 검색 페이지는 실시간 키워드 검색으로 구현합니다.
+    - 검색 결과에 **무한 스크롤**을 적용합니다.
+    - 검색 로딩 상태를 위한 **스켈레톤 컴포넌트**를 구현합니다.
+- [Figma](https://www.figma.com/design/t9UWQMvti88h5oXkXYkc1r/Netflix-Figma?node-id=0-1&m=dev&t=RMIJ6HupyivB6i21-1) 디자인을 기반으로 UI를 구현합니다.
+- Open API를 활용하여 데이터 패칭을 진행합니다. (ex. [themoviedb API](https://developers.themoviedb.org/3/getting-started/introduction))
 
 ### 👍🏻 선택 요건
 
-- SSR(Server Side Rendering)을 적용해서 구현합니다.
-- 웹 폰트를 사용합니다.
-- 반응형을 고려합니다.
+- **성능 최적화 기법**을 적용해봅니다.
 
-### 👥 Research Question
+### 🔑 Research Question
 
-- 전반적인 협업 과정에 대해 알려주세요. 👏🏻 <br/>
-  (프로젝트에서 해당 패키지 매니저를 선택한 이유, 파일 구조 컨벤션을 어떻게 지켰는지, <br/>업무 분담과 소통 방식은 어떻게 진행했는지를 함께 정리해 주세요. 21기, 22기 PR을 참고하시면 좋습니다!)
-
-### 🔑 Review Questions
-
-- React 18 버전의 변경점에 대해 설명해주세요.
-  - 서버 컴포넌트와 클라이언트 컴포넌트
-  - lazy loading과 Suspense 컴포넌트
-  - automatic batching, Concurrent Rendering 등 추가적으로 더 설명해주셔도 됩니다!
+- 5주차 → 6주차 과제를 진행하면서 **중점적으로 고려한 사항과 그 이유**를 작성해주세요.
 
 ---
 
 ### **🔗 링크 및 참고자료**
 
-(React)
-
 - [useCallback과 React.Memo를 이용한 렌더링 최적화](https://velog.io/@yejinh/useCallback%EA%B3%BC-React.Memo%EC%9D%84-%ED%86%B5%ED%95%9C-%EB%A0%8C%EB%8D%94%EB%A7%81-%EC%B5%9C%EC%A0%81%ED%99%94)
 - [성능 최적화](https://ui.toast.com/fe-guide/ko_PERFORMANCE)
+- [더 나은 UX를 위한 스켈레톤 UI 만들기](https://ui.toast.com/weekly-pick/ko_20201110)
+- [intersection Observer API 알아보기](https://www.youtube.com/watch?v=iZhq7I42uaI)
+- [intersection Observer API 블로그 포스팅](https://www.heropy.dev/p/ydKoQO)
+- [Tanstack Query를 활용한 무한 스크롤 적용](https://oliveyoung.tech/2023-10-04/useInfiniteQuery-scroll/)
+- [해외 숙소 리스트 성능 개선기-반쪽짜리 ssr에서 완벽한 인피니트 스크롤까지](https://techblog.gccompany.co.kr/%ED%95%B4%EC%99%B8-%EC%88%99%EC%86%8C-%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EC%84%B1%EB%8A%A5-%EA%B0%9C%EC%84%A0%EA%B8%B0-%EB%B0%98%EC%AA%BD%EC%A7%9C%EB%A6%AC-ssr%EC%97%90%EC%84%9C-%EC%99%84%EB%B2%BD%ED%95%9C-%EC%9D%B8%ED%94%BC%EB%8B%88%ED%8A%B8-%EC%8A%A4%ED%81%AC%EB%A1%A4%EA%B9%8C%EC%A7%80-1ef7c7962dae)
+- [react-intersection-observer 라이브러리](https://react-intersection-observer.vercel.app/?path=/docs/intro--docs)
 - [React 18의 새로운 기능](https://www.youtube.com/watch?v=7mkQi0TlJQo)
 - [react 서버 컴포넌트가 해결하는 문제들 in kakao 기술 블로그](https://tech.kakaopay.com/post/react-server-components/)
 
