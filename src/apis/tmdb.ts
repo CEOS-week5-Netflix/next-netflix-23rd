@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import type { Movie, RowType, TMDBResponse } from "@/types/movie";
 import type {
   TmdbDetail,
@@ -102,10 +101,6 @@ export async function getDetail(
       },
     },
   );
-
-  if (response.status === 404) {
-    notFound();
-  }
 
   if (!response.ok) {
     return null;

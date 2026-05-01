@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useSyncExternalStore } from "react";
+import DetailLink from "@/components/Detail/DetailLink";
 import { getMyList, MY_LIST_EVENT } from "@/store/myList";
 import type { Movie } from "@/types/movie";
 
@@ -30,11 +30,14 @@ export default function MyListRow() {
       <h2 className="text-white font-semibold text-base px-4 mb-2">찜한 목록</h2>
       <div className="flex overflow-x-auto gap-2 px-4 scrollbar-hide">
         {movies.map((movie) => (
-          <Link
-            href={`/detail/${movie.id}?mediaType=movie`}
+          <DetailLink
+            id={movie.id}
+            mediaType="movie"
+            imagePath={movie.poster_path}
+            title={movie.title}
             key={movie.id}
             className="relative flex-shrink-0 w-[100px] h-[150px]"
-            aria-label={`${movie.title} 상세 페이지로 이동`}
+            ariaLabel={`${movie.title} 상세 페이지로 이동`}
           >
             <Image
               src={`${IMAGE_BASE}/w185${movie.poster_path}`}
@@ -43,7 +46,7 @@ export default function MyListRow() {
               sizes="100px"
               className="object-cover rounded"
             />
-          </Link>
+          </DetailLink>
         ))}
       </div>
     </div>

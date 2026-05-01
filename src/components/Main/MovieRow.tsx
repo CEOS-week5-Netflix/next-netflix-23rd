@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 import { getMoviesByType } from "@/apis/tmdb";
+import DetailLink from "@/components/Detail/DetailLink";
 import { RowType } from "@/types/movie";
 import MyListRow from "./MyListRow";
 
@@ -32,11 +32,14 @@ export default async function MovieRow({ type }: Props) {
       </h2>
       <div className="flex overflow-x-auto gap-2 px-4 scrollbar-hide">
         {movies.map((movie) => (
-          <Link
-            href={`/detail/${movie.id}?mediaType=movie`}
+          <DetailLink
+            id={movie.id}
+            mediaType="movie"
+            imagePath={movie.poster_path}
+            title={movie.title}
             key={movie.id}
             className="relative flex-shrink-0 w-[100px] h-[150px]"
-            aria-label={`${movie.title} 상세 페이지로 이동`}
+            ariaLabel={`${movie.title} 상세 페이지로 이동`}
           >
             <Image
               src={`${IMAGE_BASE}/w185${movie.poster_path}`}
@@ -45,7 +48,7 @@ export default async function MovieRow({ type }: Props) {
               sizes="100px"
               className="object-cover rounded"
             />
-          </Link>
+          </DetailLink>
         ))}
       </div>
     </div>

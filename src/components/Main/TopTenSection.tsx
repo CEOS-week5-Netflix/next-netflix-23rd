@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { Check, Play, Info, Plus } from "lucide-react";
+import DetailLink from "@/components/Detail/DetailLink";
 import { Movie } from "@/types/movie";
 import { getMyList, MY_LIST_EVENT, toggleMyList } from "@/store/myList";
 
@@ -49,10 +49,13 @@ export default function TopTenSection({ movies, imageBase }: Props) {
         >
           {movies.map((movie, index) => (
             <div key={movie.id} className="relative flex-shrink-0 w-full h-[520px]">
-              <Link
-                href={`/detail/${movie.id}?mediaType=movie`}
+              <DetailLink
+                id={movie.id}
+                mediaType="movie"
+                imagePath={movie.poster_path}
+                title={movie.title}
                 className="absolute inset-0"
-                aria-label={`${movie.title} 상세 페이지로 이동`}
+                ariaLabel={`${movie.title} 상세 페이지로 이동`}
               >
                 <Image
                   src={`${imageBase}/w500${movie.poster_path}`}
@@ -62,7 +65,7 @@ export default function TopTenSection({ movies, imageBase }: Props) {
                   className="object-cover"
                   priority={index === 0}
                 />
-              </Link>
+              </DetailLink>
               <div className="pointer-events-none absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent" />
               <div className="pointer-events-none absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
                 <span className="text-lg font-bold text-white flex flex-row gap-2 items-center justify-center">

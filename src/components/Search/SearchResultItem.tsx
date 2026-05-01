@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import DetailLink from "@/components/Detail/DetailLink";
 import type { TmdbTrendingItem } from "@/types/tmdb";
 import {
   getTmdbImagePath,
@@ -17,9 +17,13 @@ export default function SearchResultItem({ item }: SearchResultItemProps) {
 
   return (
     <li className="w-full">
-      <Link
-        href={`/detail/${item.id}?mediaType=${item.media_type}`}
+      <DetailLink
+        id={item.id}
+        mediaType={item.media_type}
+        imagePath={imagePath}
+        title={title}
         className="flex h-[76px] w-full items-center bg-grey-800"
+        ariaLabel={`${title} 상세 페이지로 이동`}
       >
         <div className="relative h-[76px] w-[146px] flex-none overflow-hidden rounded-[2px] bg-grey-900">
           {imagePath ? (
@@ -49,7 +53,7 @@ export default function SearchResultItem({ item }: SearchResultItemProps) {
             />
           </span>
         </div>
-      </Link>
+      </DetailLink>
     </li>
   );
 }
