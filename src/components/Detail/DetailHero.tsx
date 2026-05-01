@@ -11,7 +11,7 @@ export default function DetailHero({ imagePath }: DetailHeroProps) {
       <div className="absolute top-0 left-1/2 h-[415px] w-[424.046px] -translate-x-1/2 overflow-hidden bg-grey-600">
         {imagePath ? (
           <Image
-            src={getTmdbImageUrl(imagePath, "w780")}
+            src={getTmdbImageUrl(imagePath, "w1280")}
             alt=""
             fill
             priority

@@ -24,7 +24,7 @@ export default function SearchResultItem({ item }: SearchResultItemProps) {
         <div className="relative h-[76px] w-[146px] flex-none overflow-hidden rounded-[2px] bg-grey-900">
           {imagePath ? (
             <Image
-              src={getTmdbImageUrl(imagePath)}
+              src={getTmdbImageUrl(imagePath, "w500")}
               alt=""
               fill
               sizes="146px"
