@@ -12,7 +12,17 @@ export type TmdbTrendingItem = {
 };
 
 export type TmdbTrendingResponse = {
+  page?: number;
   results?: TmdbTrendingItem[];
+  total_pages?: number;
+  total_results?: number;
+};
+
+export type TmdbSearchResult = {
+  page: number;
+  results: TmdbTrendingItem[];
+  totalPages: number;
+  totalResults: number;
 };
 
 export type TmdbDetail = {

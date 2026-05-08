@@ -8,6 +8,20 @@ const EMPTY_LIST: Movie[] = [];
 let cachedRaw: string | null = null;
 let cachedList: Movie[] = EMPTY_LIST;
 
+function isMovie(value: unknown): value is Movie {
+  if (!value || typeof value !== "object") {
+    return false;
+  }
+
+  const movie = value as Partial<Movie>;
+
+  return (
+    typeof movie.id === "number" &&
+    typeof movie.title === "string" &&
+    typeof movie.poster_path === "string"
+  );
+}
+
 export function getMyList(): Movie[] {
   if (typeof window === "undefined") return EMPTY_LIST;
 
@@ -19,7 +33,8 @@ export function getMyList(): Movie[] {
 
   try {
     cachedRaw = raw;
-    cachedList = JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    cachedList = Array.isArray(parsed) ? parsed.filter(isMovie) : EMPTY_LIST;
     return cachedList;
   } catch {
     cachedRaw = raw;
