@@ -1,5 +1,6 @@
 import type { TmdbTrendingItem } from "@/types/tmdb";
 import SearchResultItem from "./SearchResultItem";
+import SearchResultsSkeleton from "./SearchResultsSkeleton";
 
 type SearchResultsProps = {
   items: TmdbTrendingItem[];
@@ -13,7 +14,7 @@ export default function SearchResults({
   isLoading = false,
 }: SearchResultsProps) {
   if (isLoading) {
-    return <p className="px-4 text-body-2 text-grey-600">검색 중...</p>;
+    return <SearchResultsSkeleton />;
   }
 
   if (items.length === 0) {

@@ -26,9 +26,16 @@ export default function TopTenSection({ movies, imageBase }: Props) {
     getMyList,
     () => EMPTY_MOVIES,
   );
-  const inList = myList.some((movie) => movie.id === movies[current].id);
+  const currentMovie = movies[current];
+  const inList = currentMovie
+    ? myList.some((movie) => movie.id === currentMovie.id)
+    : false;
 
   useEffect(() => {
+    if (movies.length <= 1) {
+      return;
+    }
+
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % movies.length);
     }, 3000);
@@ -36,7 +43,15 @@ export default function TopTenSection({ movies, imageBase }: Props) {
   }, [movies.length]);
 
   function handleToggle() {
-    toggleMyList(movies[current]);
+    if (!currentMovie) {
+      return;
+    }
+
+    toggleMyList(currentMovie);
+  }
+
+  if (!currentMovie) {
+    return null;
   }
 
   return (

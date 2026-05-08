@@ -1,6 +1,7 @@
 import type { Movie, RowType, TMDBResponse } from "@/types/movie";
 import type {
   TmdbDetail,
+  TmdbSearchResult,
   TmdbTrendingItem,
   TmdbTrendingResponse,
 } from "@/types/tmdb";
@@ -19,6 +20,15 @@ function getTmdbHeaders() {
   return {
     Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`,
     accept: "application/json",
+  };
+}
+
+function getEmptySearchResult(page = 0): TmdbSearchResult {
+  return {
+    page,
+    results: [],
+    totalPages: 0,
+    totalResults: 0,
   };
 }
 
@@ -51,18 +61,23 @@ export async function getTopSearches(): Promise<TmdbTrendingItem[]> {
     .slice(0, 10);
 }
 
-export async function searchTmdb(query: string): Promise<TmdbTrendingItem[]> {
+export async function searchTmdb(
+  query: string,
+  page = 1,
+): Promise<TmdbSearchResult> {
   const headers = getTmdbHeaders();
   const keyword = query.trim();
+  const safePage = Math.max(1, Math.floor(page));
 
   if (!headers || !keyword) {
-    return [];
+    return getEmptySearchResult();
   }
 
   const searchParams = new URLSearchParams({
     query: keyword,
     language: "en-US",
     include_adult: "false",
+    page: String(safePage),
   });
 
   const response = await fetch(`${TMDB_BASE_URL}/search/multi?${searchParams}`, {
@@ -71,15 +86,20 @@ export async function searchTmdb(query: string): Promise<TmdbTrendingItem[]> {
   });
 
   if (!response.ok) {
-    return [];
+    return getEmptySearchResult(safePage);
   }
 
   const data = (await response.json()) as TmdbTrendingResponse;
-
-  return (data.results ?? [])
+  const results = (data.results ?? [])
     .filter((item) => item.media_type !== "person")
-    .filter((item) => getTmdbImagePath(item))
-    .slice(0, 20);
+    .filter((item) => getTmdbImagePath(item));
+
+  return {
+    page: data.page ?? safePage,
+    results,
+    totalPages: data.total_pages ?? 0,
+    totalResults: data.total_results ?? 0,
+  };
 }
 
 export async function getDetail(
