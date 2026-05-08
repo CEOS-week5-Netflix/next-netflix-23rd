@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { TmdbTrendingItem } from "@/types/tmdb";
 import SearchHeader from "./SearchHeader";
 import SearchResults from "./SearchResults";
+import SearchResultsSkeleton from "./SearchResultsSkeleton";
 
 type SearchPageContentProps = {
   topSearches: TmdbTrendingItem[];
@@ -219,9 +220,9 @@ export default function SearchPageContent({
         {isSearching && !isLoading ? (
           <div
             ref={loadMoreRef}
-            className="flex h-12 items-center justify-center px-4 text-caption-1 text-grey-600"
+            className="min-h-12"
           >
-            {isLoadingMore ? "더 불러오는 중..." : null}
+            {isLoadingMore ? <SearchResultsSkeleton count={2} /> : null}
           </div>
         ) : null}
       </div>
