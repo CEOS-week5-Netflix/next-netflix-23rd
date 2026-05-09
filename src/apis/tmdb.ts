@@ -32,6 +32,12 @@ function getEmptySearchResult(page = 0): TmdbSearchResult {
   };
 }
 
+function filterValidMedia(items: TmdbTrendingItem[]): TmdbTrendingItem[] {
+  return items
+    .filter((item) => item.media_type !== "person")
+    .filter((item) => getTmdbImagePath(item));
+}
+
 export async function getTopSearches(): Promise<TmdbTrendingItem[]> {
   const headers = getTmdbHeaders();
 
@@ -55,10 +61,7 @@ export async function getTopSearches(): Promise<TmdbTrendingItem[]> {
 
   const data = (await response.json()) as TmdbTrendingResponse;
 
-  return (data.results ?? [])
-    .filter((item) => item.media_type !== "person")
-    .filter((item) => getTmdbImagePath(item))
-    .slice(0, 10);
+  return filterValidMedia(data.results ?? []).slice(0, 10);
 }
 
 export async function searchTmdb(
@@ -90,9 +93,7 @@ export async function searchTmdb(
   }
 
   const data = (await response.json()) as TmdbTrendingResponse;
-  const results = (data.results ?? [])
-    .filter((item) => item.media_type !== "person")
-    .filter((item) => getTmdbImagePath(item));
+  const results = filterValidMedia(data.results ?? []);
 
   return {
     page: data.page ?? safePage,
