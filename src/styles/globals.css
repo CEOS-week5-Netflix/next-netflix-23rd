@@ -67,7 +67,7 @@
   #app-frame {
     position: relative;
     width: 375px;
-    height: 812px;
+    height: 100vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
